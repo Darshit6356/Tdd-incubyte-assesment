@@ -15,6 +15,9 @@ describe("starting calculator",()=>{
     });
     test("test for multiple numbers",()=>{
         expect(calculator.add("1,2,3,4")).toBe(10);
+    });
+    test("test for numbers with comma(,) and newline(\n)",()=>{
+        expect(calculator.add("1\n2,3")).toBe(6);
     })
 
 });
