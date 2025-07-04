@@ -32,7 +32,7 @@ describe("starting calculator...",()=>{
 
 
     test("test for other single char delimeter between the numbers.",()=>{
-        expect(calculator.add("//;\n1;2;3")).toBe(10);
+        expect(calculator.add("//;\n1;2;3")).toBe(6);
     })
 
 
