@@ -39,13 +39,17 @@ describe("starting calculator...",()=>{
     test("test for special char delimeter between the numbers.",()=>{
         expect(calculator.add("//*\n1*2*3")).toBe(6);
         expect(calculator.add("//.\n1.2.3")).toBe(6);
-    })
+    });
 
 
 
     test("test for single negative number.",()=>{
         expect(()=>calculator.add("1,2,-3")).toThrow("Negatives are not allowed : -3");
+    });
+
+
+    test("test for multiple negative number.",()=>{
+        expect(()=>calculator.add("1,-2,-3,4")).toThrow("Negatives are not allowed : -2, -3");
     })
-
-
+    
 });
