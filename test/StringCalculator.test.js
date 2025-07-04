@@ -7,8 +7,14 @@ describe("starting calculator",()=>{
     test("test for empty string",()=>{
         expect(calculator.add("")).toBe(0);
     });
-    test("test for single number ",()=>{
+    test("test for single number",()=>{
         expect(calculator.add("4")).toBe(4);
     });
+    test("test for two numbers",()=>{
+        expect(calculator.add("1,2")).toBe(3);
+    });
+    test("test for multiple numbers",()=>{
+        expect(calculator.add("1,2,3,4")).toBe(10);
+    })
 
 });
