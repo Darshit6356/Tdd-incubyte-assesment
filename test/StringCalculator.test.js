@@ -6,5 +6,9 @@ describe("starting calculator",()=>{
     });
     test("test for empty string",()=>{
         expect(calculator.add("")).toBe(0);
-    })
-})
+    });
+    test("test for single number ",()=>{
+        expect(calculator.add("4")).toBe(4);
+    });
+
+});
