@@ -51,5 +51,12 @@ describe("starting calculator...",()=>{
     test("test for multiple negative number.",()=>{
         expect(()=>calculator.add("1,-2,-3,4")).toThrow("Negatives are not allowed : -2, -3");
     })
-    
+
+
+    test("test for numbers greater than 1000 should be ignored.",()=>{
+        expect(calculator.add("10001,2")).toBe(2);
+        expect(calculator.add("10001,2000")).toBe(0);
+        expect(calculator.add("10001,20000,1000")).toBe(1000);
+    })
+
 });

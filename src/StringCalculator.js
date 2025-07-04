@@ -20,7 +20,7 @@ class StringCalculator{
             throw new Error(`Negatives are not allowed : ${negatives.join(', ')}`);
         }
 
-        return nums.reduce((sum,n)=>sum+n,0);                   //reach here only if nums have all non negative numbers
+        return nums.filter(n=>n<=1000).reduce((sum,n)=>sum+n,0);                   //reach here only if nums have all non negative numbers
     }
 
     checkForSpecialChar(delim)
