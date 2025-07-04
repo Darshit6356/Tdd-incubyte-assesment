@@ -8,14 +8,18 @@ class StringCalculator{
         {
             const newlineIndex=numbers.indexOf("\n");
             const delimeters=numbers.substring(2,newlineIndex);         // for extracting the delemeters between the "//" and "\n"
-            delimeter=new RegExp(delimeters);              //generating regular expression
+            delimeter=new RegExp(this.checkForSpecialChar(delimeters));              //generating regular expression with handling of special chars
             numbers=numbers.substring(newlineIndex+1);
         }
         const parts=numbers.split(delimeter);
         return parts.map(Number).reduce((sum,n)=>sum+n,0);
     }
 
-    
+    checkForSpecialChar(delim)
+    {
+        const special=/[.*+?^${}()|[\]\\]/g;
+        return delim.replace(special,'\\$&');
+    }
 }
 
 module.exports=StringCalculator;
