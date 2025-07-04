@@ -13,14 +13,14 @@ class StringCalculator{
         }
         const nums=numbers.split(delimeter).map(Number);
 
-        const negatives=nums.filter(n=>n<0);
+        const negatives=nums.filter(n=>n<0);                    //finding array of negative numbers
 
         if(negatives.length>0)
         {
             throw new Error(`Negatives are not allowed : ${negatives.join(', ')}`);
         }
 
-        return nums.reduce((sum,n)=>sum+n,0);
+        return nums.reduce((sum,n)=>sum+n,0);                   //reach here only if nums have all non negative numbers
     }
 
     checkForSpecialChar(delim)

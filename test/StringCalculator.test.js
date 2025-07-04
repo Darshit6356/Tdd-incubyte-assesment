@@ -44,7 +44,7 @@ describe("starting calculator...",()=>{
 
 
     test("test for single negative number.",()=>{
-        expect(calculator.add("1,2,-3")).toThrow("Negatives are not allowed : -3");
+        expect(()=>calculator.add("1,2,-3")).toThrow("Negatives are not allowed : -3");
     })
 
 
