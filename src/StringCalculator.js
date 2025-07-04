@@ -11,8 +11,16 @@ class StringCalculator{
             delimeter=new RegExp(this.checkForSpecialChar(delimeters));              //generating regular expression with handling of special chars
             numbers=numbers.substring(newlineIndex+1);
         }
-        const parts=numbers.split(delimeter);
-        return parts.map(Number).reduce((sum,n)=>sum+n,0);
+        const nums=numbers.split(delimeter).map(Number);
+
+        const negatives=nums.filter(n=>n<0);
+
+        if(negatives.length>0)
+        {
+            throw new Error(`Negatives are not allowed : ${negatives.join(', ')}`);
+        }
+
+        return nums.reduce((sum,n)=>sum+n,0);
     }
 
     checkForSpecialChar(delim)
