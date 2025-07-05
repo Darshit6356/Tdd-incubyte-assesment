@@ -1,26 +1,65 @@
 class StringCalculator{
     add(numbers)
     {
-        if(!numbers)                  //if the string is empty
+        // Return 0 for empty input
+        if(!numbers)                  
                 return 0; 
-        let delimeterUsed=/,|\n/;
+
+        // Default delimiters: comma and newline
+        let delimiters=[",","\n"];  
+        
+        //custom delimeter logic
         if(numbers.startsWith("//"))
         {
             const newlineIndex=numbers.indexOf("\n");
-            const delimeterSection=numbers.substring(2,newlineIndex);         // for extracting the delemeters between the "//" and "\n"
-            if(delimeterSection.startsWith("[") && delimeterSection.endsWith("]"))
-            {
-                //extract all substring between [ and ]
-                const extractedDelimeter=delimeterSection.slice(1,-1);
-                delimeterUsed=new RegExp(this.checkForSpecialChar(extractedDelimeter));
+
+            // for extracting the delemeters between the "//" and "\n"
+            const delimeterSection=numbers.substring(2,newlineIndex);  
+            
+            //Extract the actual number string (after "\n")
+            numbers=numbers.substring(newlineIndex+1);
+
+            if(delimeterSection.startsWith("[") && delimeterSection.endsWith("]")){
+                // Multiple or multi-character delimiters like //[***][%%]
+                delimiters=[];      // Clear default delimiters
+
+                let currentDelimiter="";
+                let collecting = false;
+
+                for(let char of delimeterSection)
+                {
+                    if(char==="[")
+                    {
+                        currentDelimiter=""
+                        collecting=true;
+                    }
+                    else if(char==="]")
+                    {
+                        collecting=false;
+                        delimiters.push(currentDelimiter);
+                    }
+                    else if(collecting){
+                        currentDelimiter+=char;
+                    }
+                }
+                
             }
             else
             {
-                delimeterUsed=new RegExp(this.checkForSpecialChar(delimeterSection));              //generating regular expression with handling of special chars
+                // Single-character delimiter
+                delimiters=[delimeterSection];              
             }
-            numbers=numbers.substring(newlineIndex+1);
+            
         }
-        const nums=numbers.split(delimeterUsed).map(Number);
+
+        // Escape special characters manually
+        const escapedDelimeter=delimiters.map(d=>this.checkForSpecialChar(d));
+
+        //creating one regular expression for all delimeters
+        const splitRegX=new RegExp(escapedDelimeter.join("|"));
+
+
+        const nums=numbers.split(splitRegX).map(Number);
 
         const negatives=nums.filter(n=>n<0);                    //finding array of negative numbers
 
