@@ -8,7 +8,7 @@ class StringCalculator{
     {
         if(section.startsWith("[") && section.endsWith("]")){
             // Multiple or multi-character delimiters like //[***][%%]
-            const delimiters=[];      // Clear default delimiters
+            const delimiters=[];      
 
             let currentDelimiter="";
             let collecting = false;
@@ -83,9 +83,6 @@ class StringCalculator{
         // Return 0 for empty input
         if(!numbers)                  
                 return 0; 
-
-        // Default delimiters: comma and newline
-        let delimiters=[",","\n"];  
         
         //custom delimeter logic
         if(numbers.startsWith("//"))
@@ -102,7 +99,12 @@ class StringCalculator{
         }
 
         // Split the numbers string into array of integers
-        const nums=numbers.split(this.DELIMETER).map(Number);
+        const nums=numbers.split(this.DELIMETER).map(s=>{
+            if(s.trim()==="")return 0;      //if the empty element is found
+            const n=Number(s);
+            if(isNaN(n)) throw new Error(`Invalid number: "${s}"`); //if any one invalid charactors occurs
+            return n;
+        });
         this.containsNegatives(nums);
 
         return this.sumValidNumbers(nums);
