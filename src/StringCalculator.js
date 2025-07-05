@@ -60,8 +60,22 @@ class StringCalculator{
 
     checkForSpecialChar(delim)
     {
-        const special=/[.*+?^${}()|[\]\\]/g;
-        return delim.replace(special,'\\$&');
+        const specials=['.','*','+','?','^','$','{','}','(',')','|','[',']','\\'];
+        let escaped='';
+        for(let char of delim)
+        {
+            // If the character is special, prefix it with a backslash
+            if(specials.includes(char))
+            {
+                escaped+="\\"+char;
+            }
+            else
+            {
+                //otherwise add it as it is
+                escaped+=char;
+            }
+        }
+        return escaped;
     }
 
     add(numbers)
