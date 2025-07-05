@@ -95,6 +95,11 @@ class StringCalculator{
             //Extract the actual number string (after "\n")
             numbers=numbers.substring(newlineIndex+1);
 
+            //if there is any default delimeter in the remaining input
+            if (numbers.includes(',') || numbers.includes('\n')) {
+                throw new Error("Unexpected default delimiter with custom delimiter.");
+            }
+
             this.DELIMETER=this.processDelimeterSection(delimeterSection);  
         }
 

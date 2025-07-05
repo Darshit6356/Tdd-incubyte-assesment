@@ -81,9 +81,16 @@ describe("starting calculator...",()=>{
         expect(calculator.add("//[((][)))]\n1((2)))3)))4")).toBe(10);
     })
 
+
     test("test for invalid characters", () => {
         expect(() => calculator.add("1,abc,2")).toThrow("Invalid number: \"abc\"");
         expect(() => calculator.add("1,abc,ok")).toThrow("Invalid number: \"abc\"");
+    });
+
+
+    test("test for mixing custom and default delimiters", () => {
+        expect(() => calculator.add("//[***]\n1***2,3")).toThrow("Unexpected default delimiter with custom delimiter.");
+        expect(() => calculator.add("//[##]\n1##2##3,4##5")).toThrow("Unexpected default delimiter with custom delimiter.");
     });
 
 });
