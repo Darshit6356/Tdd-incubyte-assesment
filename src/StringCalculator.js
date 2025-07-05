@@ -3,15 +3,23 @@ class StringCalculator{
     {
         if(!numbers)                  //if the string is empty
                 return 0; 
-        let delimeter=/,|\n/;
+        let delimeterUsed=/,|\n/;
         if(numbers.startsWith("//"))
         {
             const newlineIndex=numbers.indexOf("\n");
-            const delimeters=numbers.substring(2,newlineIndex);         // for extracting the delemeters between the "//" and "\n"
-            delimeter=new RegExp(this.checkForSpecialChar(delimeters));              //generating regular expression with handling of special chars
+            const delimeterSection=numbers.substring(2,newlineIndex);         // for extracting the delemeters between the "//" and "\n"
+            if(delimeterSection.startsWith("[") && delimeterSection.endsWith("]"))
+            {
+                //extract all substring between [ and ]
+                const extractedDelimeter=delimeterSection.slice(1,-1);
+                delimeterUsed=new RegExp(this.checkForSpecialChar(extractedDelimeter));
+            }else
+            {
+                delimeterUsed=new RegExp(this.checkForSpecialChar(delimeterSection));              //generating regular expression with handling of special chars
+            }
             numbers=numbers.substring(newlineIndex+1);
         }
-        const nums=numbers.split(delimeter).map(Number);
+        const nums=numbers.split(delimeterUsed).map(Number);
 
         const negatives=nums.filter(n=>n<0);                    //finding array of negative numbers
 
