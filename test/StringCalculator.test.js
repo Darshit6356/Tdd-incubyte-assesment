@@ -64,4 +64,10 @@ describe("starting calculator...",()=>{
         expect(calculator.add("//[$$]\n1$$2$$3")).toBe(6);
     });
 
+    
+    test("test for multiple delimeters between the numbers.",()=>
+    {
+        expect(calculator.add("//[*][%]\n1*2%3")).toBe(6);
+    })
+
 });

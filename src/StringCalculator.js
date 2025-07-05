@@ -13,7 +13,8 @@ class StringCalculator{
                 //extract all substring between [ and ]
                 const extractedDelimeter=delimeterSection.slice(1,-1);
                 delimeterUsed=new RegExp(this.checkForSpecialChar(extractedDelimeter));
-            }else
+            }
+            else
             {
                 delimeterUsed=new RegExp(this.checkForSpecialChar(delimeterSection));              //generating regular expression with handling of special chars
             }
